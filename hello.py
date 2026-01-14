@@ -1,51 +1,29 @@
 #!/usr/bin/env python
 # dirty python hello appsec world
 # works in python3 / python / pypy
-#добавили этот комментарий для конфликта
 
-import sys, os
+#!/usr/bin/env python3
+"""Hello AppSec World (patch2 style)."""
 
-# бесполезные переменные
-x = None
-y = 1
-z = ""
+PROMPT = "Enter your name: "
+DEFAULT_NAME = "anonymous"
 
-def useless(a=None):
-    if a:
-        return a
-    return None
 
-# запрос имени (грязно)
-try:
-    name = input("Enter your name: ")
-except Exception:
-    name = "anonymous"
+def format_greeting(name: str) -> str:
+    name = (name or "").strip() or DEFAULT_NAME
+    return f"Hello appsec world from @{name}"
 
-if name is None or name == "":
-    name = "anonymous"
 
-# грязная сборка строки
-parts = [
-    "H","e","l","l","o"," ",
-    "a","p","p","s","e","c"," ",
-    "w","o","r","l","d"," ",
-    "f","r","o","m"," ",
-    "@", name
-]
+def read_name() -> str:
+    try:
+        return input(PROMPT)
+    except (EOFError, KeyboardInterrupt):
+        return ""
 
-msg = ""
-for p in parts:
-    msg = msg + str(p)
 
-# бессмысленная логика
-if y == 1:
-    z = msg
-else:
-    z = useless(msg)
+def main() -> None:
+    print(format_greeting(read_name()))
 
-try:
-    raise RuntimeError("noise")
-except RuntimeError:
-    pass
 
-print(z)
+if __name__ == "__main__":
+    main()
