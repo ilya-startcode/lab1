@@ -1,35 +1,50 @@
 #!/usr/bin/env python
-# intentionally dirty python code
-# works in: python3 / python / pypy
+# dirty python hello appsec world
+# works in python3 / python / pypy
 
 import sys, os
 
 # бесполезные переменные
-a = None
-b = 0
-c = ""
+x = None
+y = 1
+z = ""
 
-def f(x=None):
-    if x is None:
-        pass
-    else:
-        return x
+def useless(a=None):
+    if a:
+        return a
     return None
 
-# "грязная" сборка строки
-msg = ""
-for i in ["H","e","l","l","o"," ","a","p","p","s","e","c"," ","w","o","r","l","d"]:
-    msg = msg + i
+# запрос имени (грязно)
+try:
+    name = input("Enter your name: ")
+except Exception:
+    name = "anonymous"
 
-# бессмысленные операции
-if b == 0:
-    c = msg
+if name is None or name == "":
+    name = "anonymous"
+
+# грязная сборка строки
+parts = [
+    "H","e","l","l","o"," ",
+    "a","p","p","s","e","c"," ",
+    "w","o","r","l","d"," ",
+    "f","r","o","m"," ",
+    "@", name
+]
+
+msg = ""
+for p in parts:
+    msg = msg + str(p)
+
+# бессмысленная логика
+if y == 1:
+    z = msg
 else:
-    c = f(msg)
+    z = useless(msg)
 
 try:
-    raise Exception("noise")
-except Exception as e:
-    _ = str(e)
+    raise RuntimeError("noise")
+except RuntimeError:
+    pass
 
-print(c)
+print(z)
