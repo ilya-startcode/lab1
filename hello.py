@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # dirty python hello appsec world
 # works in python3 / python / pypy
+#добавили этот комментарий для конфликта
 
 import sys, os
 
